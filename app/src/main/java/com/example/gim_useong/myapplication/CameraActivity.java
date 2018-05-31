@@ -163,7 +163,7 @@ public class CameraActivity extends BaseActivity implements View.OnClickListener
                             // Write new post
                             Log.d("aaaa","good");
                             Future uploading = Ion.with(CameraActivity.this)
-                                    .load("http://192.168.0.34:8080/upload/"+getUid())
+                                    .load("http://35.173.244.212:8080/upload/"+getUid())
                                     .setMultipartFile("image",f )
                                     .setMultipartParameter("author",user.username)
                                     .asString()
