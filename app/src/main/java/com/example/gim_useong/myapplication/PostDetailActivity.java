@@ -91,7 +91,7 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
                 List<String> arr= dataSnapshot.child("body").getValue(t);
                 Log.d("aaaaa",arr.get(0));
                 for(int i=0;i<arr.size();i++){
-                    String str= String.format(getResources().getString(R.string.textview_message),arr.get(i),arr.get(i),arr.get(i));
+                    String str= String.format(getResources().getString(R.string.textview_message),arr.get(i));
                     mBodyView.append(str);
                 }
                 // [START_EXCLUDE]

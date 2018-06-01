@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.gim_useong.myapplication.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -138,28 +139,16 @@ public class MainActivity extends BaseActivity
         if (id == R.id.all_product) {
             Intent intent = new Intent(MainActivity.this, ListViewActivity.class);
             startActivity(intent);
+        }else if (id == R.id.camera_recognition) {
+            Intent intent = new Intent(MainActivity.this, CameraActivity.class);
+            startActivity(intent);
+        }else if(id == R.id.logout){
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+            return true;
         }
-        /*
-        else if (id == R.id.today_menu) {
-            Intent intent = new Intent(MainActivity.this, recipe_list.class);
-            startActivity(intent);
-        } else if (id == R.id.menu_notice) {
-            Intent intent = new Intent(MainActivity.this, menu_notice.class);
-            startActivity(intent);
-        } else if (id == R.id.camera_recognition) {
-            Intent intent = new Intent(MainActivity.this, camera_option.class);
-            startActivity(intent);
-        } else if (id == R.id.voice_recognition) {
-            Intent intent = new Intent(MainActivity.this, voice_option.class);
-            startActivity(intent);
-        } else if (id == R.id.write_recognition) {
-            Intent intent = new Intent(MainActivity.this, pen_option.class);
-            startActivity(intent);
-        } else if(id == R.id.setting){
-            Intent intent = new Intent(MainActivity.this, SettingActivity.class);
-            startActivity(intent);
-        } //else if 로그아웃 기능
-*/
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
