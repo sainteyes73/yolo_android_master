@@ -156,10 +156,11 @@ public class CameraActivity extends BaseActivity implements View.OnClickListener
                             // User is null, error out
                             Log.e(TAG, "User " + userId + " is unexpectedly null");
                             Toast.makeText(CameraActivity.this,
-                                    "Error: could not fetch user.",
+                                    "유저 오류 재로그인 부탁드립니다.",
                                     Toast.LENGTH_SHORT).show();
 
                         } else {
+                            showProgressDialog();
                             // Write new post
                             Log.d("aaaa","good");
                             Future uploading = Ion.with(CameraActivity.this)
@@ -175,10 +176,12 @@ public class CameraActivity extends BaseActivity implements View.OnClickListener
                                                 JSONObject jobj = new JSONObject(result.getResult());
                                                 Toast.makeText(getApplicationContext(), jobj.getString("response"), Toast.LENGTH_SHORT).show();
 
-                                                if(jobj.getString("response")=="Saved"){
+                                                if(jobj.getString("response").equals("Saved")){
                                                     //액티비티 넘길것
                                                     //postkey=jobj.getString("postkey");
+                                                    hideProgressDialog();
                                                     startActivity(new Intent(CameraActivity.this, ListViewActivity.class));
+                                                    finish();
                                                 }
 
                                             }catch(JSONException e1){
