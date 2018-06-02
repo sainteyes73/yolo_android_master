@@ -18,6 +18,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.example.gim_useong.myapplication.models.User;
+
+import static java.lang.Thread.sleep;
+
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = "LoginActivity";
@@ -116,11 +119,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         String username = usernameFromEmail(user.getEmail());//유저 이메일 형식 string변수에
 
         // Write new user
-        writeNewUser(user.getUid(), username, user.getEmail());
 
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            finish();
         // Go to MainActivity
-        startActivity(new Intent(LoginActivity.this, MainActivity.class));
-        finish();
+
     }
 
     private String usernameFromEmail(String email) {

@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.gim_useong.myapplication.R;
+import com.example.gim_useong.myapplication.models.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,12 +38,18 @@ public class MainActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         setting();
+        setnav();
+    }
+    @Override
+    public void onStart(){
+        super.onStart();
         initView();
     }
     public void setting(){
 
-        mDatabase= FirebaseDatabase.getInstance().getReference("users");
+        mDatabase= FirebaseDatabase.getInstance().getReference().child("users").child(getUid());
     }
     public void setnav(){
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -50,22 +57,12 @@ public class MainActivity extends BaseActivity
         final TextView navUsername = (TextView)headerView.findViewById(R.id.nickname);
         final TextView navEmail= (TextView)headerView.findViewById(R.id.head_id);
         navigationView.setNavigationItemSelectedListener(this);
-        mDatabase.child(getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    if(snapshot.getKey()=="username"){
-                        //nick_name.setText((String)snapshot.getValue());
-                        Log.d("aaaa",(String)snapshot.getValue());
-                        //navUsername.setText((String)snapshot.getValue());
-                        head_name=(String)snapshot.getValue();
-                        navUsername.setText(head_name);
-                    }
-                    else if(snapshot.getKey()=="email"){
-                        head_id=(String)snapshot.getValue();
-                        navEmail.setText(head_id);
-                    }
-                }
+                User user=dataSnapshot.getValue(User.class);
+                navUsername.setText(user.username);
+                navEmail.setText(user.email);
             }
 
             @Override
@@ -77,7 +74,7 @@ public class MainActivity extends BaseActivity
     public void initView(){
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        //setnav();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,7 +89,7 @@ public class MainActivity extends BaseActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-        setnav();
+
         imageView1 = (ImageView)findViewById(R.id.camera_icon);
         imageView2 = (ImageView)findViewById(R.id.voice_icon);
         imageView3 = (ImageView)findViewById(R.id.pen_icon);

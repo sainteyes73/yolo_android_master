@@ -30,4 +30,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     public int getItemCount() {
         return this.mydata.size();
     }
+    public void deleteItem(int index) {
+        mydata.remove(index);
+        notifyItemRemoved(index);
+    }
 }

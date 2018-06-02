@@ -20,34 +20,37 @@ public class RecyclerViewHolders extends RecyclerView.ViewHolder{
     public TextView categoryTitle;
     public ImageView deleteIcon;
     private List<String> mydataObject;
+
+    private RecyclerViewAdapter recyclerViewAdapter;
     public RecyclerViewHolders(final View itemView, final List<String> mydataObject) {
         super(itemView);
         this.mydataObject = mydataObject;
         categoryTitle = (TextView)itemView.findViewById(R.id.mydata_title);
         markIcon = (ImageView)itemView.findViewById(R.id.mydata_icon);
         deleteIcon = (ImageView)itemView.findViewById(R.id.mydata_delete);
+
         deleteIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(v.getContext(), "Delete icon has been clicked", Toast.LENGTH_LONG).show();
-                String mydataTitle = mydataObject.get(getAdapterPosition());
+                final String mydataTitle = mydataObject.get(getAdapterPosition());
                 Log.d(TAG, "MyData Title " + mydataTitle);
-                DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-                Query applesQuery = ref.orderByChild("mydata").equalTo(mydataTitle);
+
+
                 applesQuery.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot appleSnapshot: dataSnapshot.getChildren()) {
-                            appleSnapshot.getRef().removeValue();
 
-                        }
                     }
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                         Log.e(TAG, "onCancelled", databaseError.toException());
                     }
                 });
+
+
             }
         });
+
     }
 }
