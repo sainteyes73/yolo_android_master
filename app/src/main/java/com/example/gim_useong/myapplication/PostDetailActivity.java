@@ -1,6 +1,8 @@
 package com.example.gim_useong.myapplication;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -45,7 +47,8 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
     private EditText mCommentField;
     private Button mCommentButton;
     private RecyclerView mCommentsRecycler;
-
+    private Button mRecipeBtn;
+    private List<String> save;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +67,7 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
                 .child("post-comments").child(mPostKey);
 
         // Initialize Views
+        mRecipeBtn = findViewById(R.id.recipe);
         mAuthorView = findViewById(R.id.post_author);
         mTitleView = findViewById(R.id.post_title);
         mBodyView = findViewById(R.id.post_body);
@@ -89,6 +93,7 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
                 Post post = dataSnapshot.getValue(Post.class);
                 GenericTypeIndicator<ArrayList<String>> t = new GenericTypeIndicator<ArrayList<String>>() {};
                 List<String> arr= dataSnapshot.child("body").getValue(t);
+                save=arr;
                 Log.d("aaaaa",arr.get(0));
                 for(int i=0;i<arr.size();i++){
                     String str= String.format(getResources().getString(R.string.textview_message),arr.get(i));
@@ -113,7 +118,27 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
         };
         mPostReference.addValueEventListener(postListener);
         // [END post_value_event_listener]
+        mRecipeBtn.setOnClickListener(new View.OnClickListener() {
+            String result;
+            @Override
+            public void onClick(View view) {
+                int i;
+                for(i=0;i<save.size()-1;i++){
+                    if(i==0){
+                        result=save.get(i);
+                    }
 
+                    result=result.concat("+");
+                    result =result.concat(save.get(i+1));
+                }
+                Log.d("a1234",result);
+                String url = "http://www.10000recipe.com/recipe/list.html?q="+result;
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(intent);
+                onStop();
+
+            }
+        });
         // Keep copy of post listener so we can remove it when app stops
         mPostListener = postListener;
 

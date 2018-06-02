@@ -28,7 +28,38 @@ public class RecyclerViewHolders extends RecyclerView.ViewHolder{
         categoryTitle = (TextView)itemView.findViewById(R.id.mydata_title);
         markIcon = (ImageView)itemView.findViewById(R.id.mydata_icon);
         deleteIcon = (ImageView)itemView.findViewById(R.id.mydata_delete);
+       /*
+        deleteIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(), "Delete icon has been clicked", Toast.LENGTH_LONG).show();
+                final String mydataTitle = mydataObject.get(getAdapterPosition());
+                Log.d(TAG, "MyData Title " + mydataTitle);
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+                mydataObject.remove(getAdapterPosition());
+               //Query applesQuery = ref.orderByChild("mydata").equalTo(mydataTitle);
+
+                applesQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for(int i = 0; i < mydataObject.size(); i++){
+                            if(mydataObject.get(i).equals(mydataTitle)){
+                                mydataObject.remove(i);
+                            }
+                        }
+                        Log.d(TAG, "MyData tile " + mydataTitle);
+                        recyclerViewAdapter = new RecyclerViewAdapter(ModifyActivity.this, );
+                        recyclerView.setAdapter(recyclerViewAdapter);
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.e(TAG, "onCancelled", databaseError.toException());
+                    }
+                });
 
 
+            }
+        });
+*/
     }
 }

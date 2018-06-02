@@ -1,8 +1,6 @@
 package com.example.gim_useong.myapplication;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -36,7 +34,6 @@ public class ModifyActivity extends BaseActivity {
     private DatabaseReference mUserPostRefernce;
     private List<String> allMyData;
     private String mPostKey;
-    private FloatingActionButton mod_fab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,14 +51,6 @@ public class ModifyActivity extends BaseActivity {
         recyclerView = (RecyclerView)findViewById(R.id.mydata_list);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_modify);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ModifyActivity.this, ListViewActivity.class);
-                startActivity(intent);
-            }
-        });
 
         Button addMyDataButton = (Button)findViewById(R.id.add_mydata_button);
         getAllMyData();

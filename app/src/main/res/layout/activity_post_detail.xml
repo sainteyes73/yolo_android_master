@@ -16,6 +16,16 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true" />
 
+    <Button
+        android:id="@+id/recipe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/comment_form"
+        android:layout_alignTop="@+id/post_author_layout"
+        android:text="추천레시피"
+        android:textColor="#EDFF99"
+        />
+
     <include
         android:id="@+id/post_text_layout"
         layout="@layout/include_post_text"
