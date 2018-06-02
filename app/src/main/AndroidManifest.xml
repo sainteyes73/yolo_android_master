@@ -39,7 +39,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ListViewActivity" />
         <activity android:name=".PostDetailActivity" />
-        <activity android:name=".dialog.DeleteDialog"></activity>
+        <activity android:name=".dialog.DeleteDialog" />
+        <activity android:name=".ModifyActivity"></activity>
     </application>
 
 </manifest>

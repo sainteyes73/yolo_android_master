@@ -176,13 +176,16 @@ public class CameraActivity extends BaseActivity implements View.OnClickListener
                                                 JSONObject jobj = new JSONObject(result.getResult());
                                                 Toast.makeText(getApplicationContext(), jobj.getString("response"), Toast.LENGTH_SHORT).show();
 
-                                                if(jobj.getString("response").equals("Saved")){
+                                             //   if((jobj.getString("response").equals("Saved"))){
                                                     //액티비티 넘길것
-                                                    //postkey=jobj.getString("postkey");
+                                                    String postkey=jobj.getString("postkey");
+                                                    Log.d("a123",postkey);
                                                     hideProgressDialog();
-                                                    startActivity(new Intent(CameraActivity.this, ListViewActivity.class));
+                                                    Intent intent = new Intent(CameraActivity.this, ModifyActivity.class);
+                                                    intent.putExtra(PostDetailActivity.EXTRA_POST_KEY, postkey);
+                                                    startActivity(intent);
                                                     finish();
-                                                }
+                                        //        }
 
                                             }catch(JSONException e1){
                                                 e1.printStackTrace();
