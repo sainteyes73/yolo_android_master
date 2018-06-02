@@ -29,28 +29,6 @@ public class RecyclerViewHolders extends RecyclerView.ViewHolder{
         markIcon = (ImageView)itemView.findViewById(R.id.mydata_icon);
         deleteIcon = (ImageView)itemView.findViewById(R.id.mydata_delete);
 
-        deleteIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(v.getContext(), "Delete icon has been clicked", Toast.LENGTH_LONG).show();
-                final String mydataTitle = mydataObject.get(getAdapterPosition());
-                Log.d(TAG, "MyData Title " + mydataTitle);
-
-
-                applesQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        Log.e(TAG, "onCancelled", databaseError.toException());
-                    }
-                });
-
-
-            }
-        });
 
     }
 }

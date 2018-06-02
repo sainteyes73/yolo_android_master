@@ -119,7 +119,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         String username = usernameFromEmail(user.getEmail());//유저 이메일 형식 string변수에
 
         // Write new user
-
+            writeNewUser(user.getUid(),username,user.getEmail());
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
             finish();
         // Go to MainActivity

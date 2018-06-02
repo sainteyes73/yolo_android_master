@@ -58,14 +58,14 @@ public class  ListViewActivity extends BaseActivity {
         tabLayout.setupWithViewPager(mViewPager);
 
         // Button launches NewPostActivity
-        /*
+
         findViewById(R.id.fab_new_post).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ListViewActivity.this, NewPostActivity.class));
+                startActivity(new Intent(ListViewActivity.this, CameraActivity.class));
             }
         });
-        */
+
     }
 
     @Override

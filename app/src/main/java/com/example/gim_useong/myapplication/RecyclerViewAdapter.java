@@ -22,16 +22,24 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         return viewHolder;
     }
     @Override
-    public void onBindViewHolder(RecyclerViewHolders holder, int position) {
+    public void onBindViewHolder(RecyclerViewHolders holder, final int position) {
         holder.categoryTitle.setText(mydata.get(position));
+        holder.deleteIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mydata.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position, mydata.size());
 
+            }
+        });
     }
     @Override
     public int getItemCount() {
         return this.mydata.size();
     }
     public void deleteItem(int index) {
-        mydata.remove(index);
-        notifyItemRemoved(index);
+
     }
+
 }

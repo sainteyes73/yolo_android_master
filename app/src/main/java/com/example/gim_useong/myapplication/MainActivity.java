@@ -29,16 +29,12 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private ImageView imageView1, imageView2, imageView3;
-    private ImageView today_photo;
     private DatabaseReference mDatabase;
-    private String head_id;
-    private String head_name;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         setting();
         setnav();
     }
@@ -79,8 +75,8 @@ public class MainActivity extends BaseActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(MainActivity.this,CameraActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -90,23 +86,6 @@ public class MainActivity extends BaseActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        imageView1 = (ImageView)findViewById(R.id.camera_icon);
-        imageView2 = (ImageView)findViewById(R.id.voice_icon);
-        imageView3 = (ImageView)findViewById(R.id.pen_icon);
-        imageView1.setImageResource(R.drawable.camera);
-        imageView2.setImageResource(R.drawable.voice);
-        imageView3.setImageResource(R.drawable.pen);
-
-        imageView1.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this,CameraActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        today_photo = (ImageView)findViewById(R.id.today_recipe);
-
-        today_photo.setImageResource(R.drawable.todaymenu);
     }
 
     @Override
