@@ -8,6 +8,8 @@ import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.example.gim_useong.myapplication.fragment.MyPostsFragment;
@@ -23,7 +25,10 @@ public class  ListViewActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_list);
 
         // Create the adapter that will return a fragment for each section

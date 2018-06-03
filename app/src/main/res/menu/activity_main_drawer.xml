@@ -6,15 +6,15 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/all_product"
-            android:icon="@drawable/ic_launcher_foreground"
+            android:icon="@drawable/box"
             android:title="보관중인 품목" />
         <item
             android:id="@+id/today_menu"
-            android:icon="@drawable/ic_launcher_foreground"
+            android:icon="@drawable/recipe"
             android:title="오늘의 메뉴" />
         <item
             android:id="@+id/menu_notice"
-            android:icon="@drawable/ic_launcher_foreground"
+            android:icon="@drawable/notice"
             android:title="공지사항"/>
     </group>
 
@@ -24,14 +24,6 @@
                 android:id="@+id/camera_recognition"
                 android:icon="@drawable/ic_menu_camera"
                 android:title="카메라 인식"/>
-            <item
-                android:id="@+id/voice_recognition"
-                android:icon="@drawable/ic_launcher_foreground"
-                android:title="음성 인식"/>
-            <item
-                android:id="@+id/write_recognition"
-                android:icon="@drawable/ic_launcher_foreground"
-                android:title="수기 입력" />
         </menu>
     </item>
 
@@ -39,11 +31,11 @@
         <menu>
             <item
                 android:id="@+id/setting"
-                android:icon="@drawable/ic_launcher_foreground"
+                android:icon="@drawable/settings"
                 android:title="설정"/>
             <item
                 android:id="@+id/logout"
-                android:icon="@drawable/ic_launcher_foreground"
+                android:icon="@drawable/logout"
                 android:title="로그아웃"/>
         </menu>
     </item>

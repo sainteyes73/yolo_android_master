@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -53,7 +54,8 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_detail);
-
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         // Get post key from intent
         mPostKey = getIntent().getStringExtra(EXTRA_POST_KEY);
         if (mPostKey == null) {
@@ -135,7 +137,8 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
                 String url = "http://www.10000recipe.com/recipe/list.html?q="+result;
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 startActivity(intent);
-                onStop();
+                Intent m_intent=new Intent(PostDetailActivity.this,ListViewActivity.class);
+                startActivity(m_intent);
 
             }
         });

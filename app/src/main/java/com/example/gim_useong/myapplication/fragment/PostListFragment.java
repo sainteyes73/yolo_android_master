@@ -193,7 +193,7 @@ public abstract class PostListFragment extends Fragment {
                                if(getUid().equals(dataSnapshot.child("uid").getValue())){
                                    mPostReference.removeValue();
                                    mUserPostRefernce.removeValue();
-                               }else if(!(getUid().equals(dataSnapshot.child("uid").getValue()))){
+                               }else{
                                    Toast.makeText(getActivity().getApplicationContext(), "자신의 글만 삭제 가능", Toast.LENGTH_SHORT).show();
                                }
                             }
