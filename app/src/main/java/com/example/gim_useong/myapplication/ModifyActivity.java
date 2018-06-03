@@ -42,9 +42,6 @@ public class ModifyActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         mPostKey = getIntent().getStringExtra(EXTRA_POST_KEY);
         Log.d("a123",mPostKey);
         //databaseReference=FirebaseDatabase.getInstance().getReference();

@@ -28,11 +28,7 @@
         </provider>
 
         <activity android:name=".LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
@@ -40,7 +36,19 @@
         <activity android:name=".ListViewActivity" />
         <activity android:name=".PostDetailActivity" />
         <activity android:name=".dialog.DeleteDialog" />
-        <activity android:name=".ModifyActivity"></activity>
+        <activity android:name=".ModifyActivity" />
+
+        <service
+            android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService"
+            android:enabled="true" />
+
+        <activity android:name=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

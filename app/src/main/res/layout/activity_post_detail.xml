@@ -23,8 +23,8 @@
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/comment_form"
         android:layout_alignTop="@+id/post_author_layout"
-        android:text="추천레시피"
-        android:textColor="#EDFF99"
+        android:text="레시피"
+        style="@style/Base.TextAppearance.AppCompat.Small"
         />
 
     <include
@@ -36,6 +36,16 @@
         android:layout_below="@+id/post_author_layout"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp" />
+
+    <include
+        android:id="@+id/my_image"
+        layout="@layout/image_view"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignStart="@+id/recipe"
+        android:layout_below="@+id/post_author_layout"/>
+
+
 
     <LinearLayout
         android:id="@+id/comment_form"

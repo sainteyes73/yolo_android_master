@@ -13,9 +13,15 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amazonaws.auth.CognitoCachingCredentialsProvider;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.bumptech.glide.Glide;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -48,14 +54,20 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
     private EditText mCommentField;
     private Button mCommentButton;
     private RecyclerView mCommentsRecycler;
+    private ImageView mImageView;
     private Button mRecipeBtn;
     private List<String> save;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_detail);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
+                getApplicationContext(),
+                "us-east-1:094487f6-0c89-4565-b7bf-d159671a22b2", // Identity pool ID
+                Regions.US_EAST_1 // Region
+        );
+        AmazonS3 s3 = new AmazonS3Client(credentialsProvider);
+
         // Get post key from intent
         mPostKey = getIntent().getStringExtra(EXTRA_POST_KEY);
         if (mPostKey == null) {
@@ -69,6 +81,7 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
                 .child("post-comments").child(mPostKey);
 
         // Initialize Views
+        mImageView = findViewById(R.id.my_image);
         mRecipeBtn = findViewById(R.id.recipe);
         mAuthorView = findViewById(R.id.post_author);
         mTitleView = findViewById(R.id.post_title);
@@ -76,7 +89,6 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
         mCommentField = findViewById(R.id.field_comment_text);
         mCommentButton = findViewById(R.id.button_post_comment);
         mCommentsRecycler = findViewById(R.id.recycler_comments);
-
         mCommentButton.setOnClickListener(this);
         mCommentsRecycler.setLayoutManager(new LinearLayoutManager(this));
 
@@ -104,6 +116,10 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
                 // [START_EXCLUDE]
                 mAuthorView.setText(post.author);
                 mTitleView.setText(post.title);
+                Glide.with(getBaseContext())
+                        .load("https://refri.s3.ap-northeast-1.amazonaws.com/refriBox/1528038965114-uploadsnostest_1587206623.jpg")
+                        .into(mImageView);
+
                // mBodyView.setText(post.);
                 // [END_EXCLUDE]
             }
@@ -137,8 +153,6 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
                 String url = "http://www.10000recipe.com/recipe/list.html?q="+result;
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 startActivity(intent);
-                Intent m_intent=new Intent(PostDetailActivity.this,ListViewActivity.class);
-                startActivity(m_intent);
 
             }
         });

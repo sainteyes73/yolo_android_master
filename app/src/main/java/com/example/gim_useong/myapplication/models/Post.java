@@ -17,6 +17,7 @@ public class Post {
     public String title;
     public List<String> body;
     public int starCount = 0;
+    public String photo;
     public Map<String, Boolean> stars = new HashMap<>();
 
     public Post() {
@@ -40,7 +41,7 @@ public class Post {
         result.put("body", body);
         result.put("starCount", starCount);
         result.put("stars", stars);
-
+        result.put("photo",photo);
         return result;
     }
     // [END post_to_map]

@@ -11,7 +11,7 @@ public class RecentPostsFragment extends PostListFragment {
     public Query getQuery(DatabaseReference databaseReference) {
         //유저들 타임라인
         Query recentPostsQuery = databaseReference.child("posts")
-                .limitToFirst(100);
+                .limitToFirst(20);
 
         return recentPostsQuery;
     }
