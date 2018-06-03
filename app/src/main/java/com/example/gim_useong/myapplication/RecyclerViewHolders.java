@@ -28,7 +28,7 @@ public class RecyclerViewHolders extends RecyclerView.ViewHolder{
         categoryTitle = (TextView)itemView.findViewById(R.id.mydata_title);
         markIcon = (ImageView)itemView.findViewById(R.id.mydata_icon);
         deleteIcon = (ImageView)itemView.findViewById(R.id.mydata_delete);
-       /*
+/*
         deleteIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,4 +62,5 @@ public class RecyclerViewHolders extends RecyclerView.ViewHolder{
         });
 */
     }
+
 }

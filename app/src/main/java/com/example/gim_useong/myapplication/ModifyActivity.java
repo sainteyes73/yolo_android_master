@@ -1,6 +1,8 @@
 package com.example.gim_useong.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -34,6 +36,7 @@ public class ModifyActivity extends BaseActivity {
     private DatabaseReference mUserPostRefernce;
     private List<String> allMyData;
     private String mPostKey;
+    private FloatingActionButton m_fab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,9 +54,19 @@ public class ModifyActivity extends BaseActivity {
         recyclerView = (RecyclerView)findViewById(R.id.mydata_list);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-
+        m_fab=(FloatingActionButton)findViewById(R.id.fab_modify);
+        m_fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPostReference.child("body").setValue(allMyData);
+                mUserPostRefernce.child("body").setValue(allMyData);
+                Intent intent=new Intent(ModifyActivity.this,ListViewActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
         Button addMyDataButton = (Button)findViewById(R.id.add_mydata_button);
-        getAllMyData();
+        //getAllMyData();
         addMyDataButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,41 +83,39 @@ public class ModifyActivity extends BaseActivity {
                 recyclerView.setAdapter(recyclerViewAdapter);
             }
         });
-
-    }
-    private void getAllMyData(){
-
-        ValueEventListener postListener = new ValueEventListener() {
+        mPostReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // Get Post object and use the values to update the UI
-               // Post post = dataSnapshot.getValue(Post.class);
-                GenericTypeIndicator<ArrayList<String>> t = new GenericTypeIndicator<ArrayList<String>>() {};
-                List<String> arr= dataSnapshot.child("body").getValue(t);
-                allMyData=arr;
-                //Log.d("aaaaa",arr.get(0));
-                recyclerViewAdapter = new RecyclerViewAdapter(ModifyActivity.this, arr);
-                recyclerView.setAdapter(recyclerViewAdapter);
+                getAllMyData(dataSnapshot);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
-                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
-                // [START_EXCLUDE]
-                Toast.makeText(ModifyActivity.this, "Failed to load post.",
-                        Toast.LENGTH_SHORT).show();
-                // [END_EXCLUDE]
+
             }
-        };
-        mPostReference.addValueEventListener(postListener);
-
-
+        });
     }
+    private void getAllMyData(DataSnapshot dataSnapshot){
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
+        GenericTypeIndicator<ArrayList<String>> t = new GenericTypeIndicator<ArrayList<String>>() {};
+        List<String> arr= dataSnapshot.child("body").getValue(t);
+        allMyData=arr;
+        //Log.d("aaaaa",arr.get(0));
+        recyclerViewAdapter = new RecyclerViewAdapter(ModifyActivity.this, arr);
+        recyclerView.setAdapter(recyclerViewAdapter);
+    }
+    private void taskDeletion(DataSnapshot dataSnapshot){
+        for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
+            String taskTitle = singleSnapshot.getValue(String.class);
+            for(int i = 0; i < allMyData.size(); i++){
+                if(allMyData.get(i).equals(taskTitle)){
+                    allMyData.remove(i);
+                }
+            }
+            Log.d(TAG, "Task tile " + taskTitle);
+            recyclerViewAdapter.notifyDataSetChanged();
+            recyclerViewAdapter = new RecyclerViewAdapter(ModifyActivity.this, allMyData);
+            recyclerView.setAdapter(recyclerViewAdapter);
+        }
     }
 }

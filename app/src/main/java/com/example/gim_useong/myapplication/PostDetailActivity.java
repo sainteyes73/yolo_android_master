@@ -265,7 +265,7 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
 
                 @Override
                 public void onChildRemoved(DataSnapshot dataSnapshot) {
-                    Log.d(TAG, "onChildRemoved:" + dataSnapshot.getKey());
+                        Log.d(TAG, "onChildRemoved:" + dataSnapshot.getKey());
 
                     // A comment has changed, use the key to determine if we are displaying this
                     // comment and if so remove it.
