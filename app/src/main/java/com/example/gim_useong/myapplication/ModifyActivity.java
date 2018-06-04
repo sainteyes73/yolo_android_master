@@ -98,8 +98,17 @@ public class ModifyActivity extends BaseActivity {
     private void getAllMyData(DataSnapshot dataSnapshot){
 
         GenericTypeIndicator<ArrayList<String>> t = new GenericTypeIndicator<ArrayList<String>>() {};
-        List<String> arr= dataSnapshot.child("body").getValue(t);
+        List<String> arr=null;
+        arr= dataSnapshot.child("body").getValue(t);
         allMyData=arr;
+        if(arr.isEmpty()){
+            mPostReference.removeValue();
+            mUserPostRefernce.removeValue();
+            Toast.makeText(ModifyActivity.this,
+                    "인식된 물품이 없습니다",
+                    Toast.LENGTH_SHORT).show();
+            finish();
+        }
         //Log.d("aaaaa",arr.get(0));
         recyclerViewAdapter = new RecyclerViewAdapter(ModifyActivity.this, arr);
         recyclerView.setAdapter(recyclerViewAdapter);

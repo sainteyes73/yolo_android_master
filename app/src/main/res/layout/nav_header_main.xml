@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        app:srcCompat="@drawable/profile" />
+        app:srcCompat="@drawable/ic_action_account_circle_40" />
 
     <TextView
         android:id="@+id/head_id"

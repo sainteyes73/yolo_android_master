@@ -1,7 +1,9 @@
 package com.example.gim_useong.myapplication;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.ComponentName;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -54,7 +56,7 @@ import java.util.List;
 
 public class CameraActivity extends BaseActivity implements View.OnClickListener {
     private ImageView imgMain;
-    private Button btnCamera, btnAlbum, btnok;
+    private Button btnCamera, btnok;
 
     private static final int PICK_FROM_CAMERA = 1;
     private static final int PICK_FROM_ALBUM = 2;
@@ -101,12 +103,11 @@ public class CameraActivity extends BaseActivity implements View.OnClickListener
 
     private void initView() {
         imgMain = (ImageView) findViewById(R.id.img_test);
-        btnCamera = (Button) findViewById(R.id.btn_camera);
-        btnAlbum = (Button) findViewById(R.id.btn_album);
-        btnok=(Button)findViewById(R.id.btn_ok);
+        btnCamera = (Button) findViewById(R.id.btn_select);
+        btnok=(Button)findViewById(R.id.btn_server);
         btnok.setOnClickListener(this);
         btnCamera.setOnClickListener(this);
-        btnAlbum.setOnClickListener(this);
+        //btnAlbum.setOnClickListener(this);
 
     }
 
@@ -216,13 +217,10 @@ public class CameraActivity extends BaseActivity implements View.OnClickListener
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_camera:
-                takePhoto();
+            case R.id.btn_select:
+                Dialog();
                 break;
-            case R.id.btn_album:
-                goToAlbum();
-                break;
-            case R.id.btn_ok:
+            case R.id.btn_server:
                 transserver();
                 break;
         }
@@ -278,6 +276,7 @@ public class CameraActivity extends BaseActivity implements View.OnClickListener
         } else if (requestCode == PICK_FROM_CAMERA) {
             cropImage();
             // 갤러리에 나타나게
+
             MediaScannerConnection.scanFile(CameraActivity.this,
                     new String[]{photoUri.getPath()}, null,
                     new MediaScannerConnection.OnScanCompletedListener() {
@@ -308,6 +307,8 @@ public class CameraActivity extends BaseActivity implements View.OnClickListener
                 int size = list.size();
                 if (size == 0) {
                     Toast.makeText(this, "취소 되었습니다.", Toast.LENGTH_SHORT).show();
+                    btnCamera.setVisibility(View.VISIBLE);
+                    btnok.setVisibility(View.INVISIBLE);
                     return;
         } else {
             Toast.makeText(this, "용량이 큰 사진의 경우 시간이 오래 걸릴 수 있습니다.", Toast.LENGTH_SHORT).show();
@@ -353,7 +354,29 @@ public class CameraActivity extends BaseActivity implements View.OnClickListener
                         Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
             }
             i.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
+            btnCamera.setVisibility(View.INVISIBLE);
+            btnok.setVisibility(View.VISIBLE);
             startActivityForResult(i, CROP_FROM_CAMERA);
         }
+    }
+    public void Dialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(CameraActivity.this);
+        builder.setTitle("사진 등록");
+        builder.setMessage("업로드 옵션");
+        builder.setPositiveButton("엘범",
+                new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which) {
+                        goToAlbum();
+                    }
+
+                });
+        builder.setNegativeButton("카메라",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        takePhoto();
+                    }
+                });
+        builder.show();
     }
 }

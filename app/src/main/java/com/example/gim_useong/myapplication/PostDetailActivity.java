@@ -18,10 +18,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amazonaws.auth.CognitoCachingCredentialsProvider;
+import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -36,6 +38,8 @@ import com.example.gim_useong.myapplication.models.Post;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bumptech.glide.annotation.GlideModule;
+import com.bumptech.glide.module.AppGlideModule;
 public class PostDetailActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = "PostDetailActivity";
@@ -57,6 +61,7 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
     private ImageView mImageView;
     private Button mRecipeBtn;
     private List<String> save;
+    private static TransferUtility transferUtility;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,8 +71,10 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
                 "us-east-1:094487f6-0c89-4565-b7bf-d159671a22b2", // Identity pool ID
                 Regions.US_EAST_1 // Region
         );
-        AmazonS3 s3 = new AmazonS3Client(credentialsProvider);
 
+
+        AmazonS3 s3 = new AmazonS3Client(credentialsProvider);
+        transferUtility = new TransferUtility(s3, getApplicationContext());
         // Get post key from intent
         mPostKey = getIntent().getStringExtra(EXTRA_POST_KEY);
         if (mPostKey == null) {
@@ -116,8 +123,11 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
                 // [START_EXCLUDE]
                 mAuthorView.setText(post.author);
                 mTitleView.setText(post.title);
-                Glide.with(getBaseContext())
-                        .load("https://refri.s3.ap-northeast-1.amazonaws.com/refriBox/1528038965114-uploadsnostest_1587206623.jpg")
+                Glide.with(getApplicationContext())
+                        .load(post.photo)
+                        .apply(new RequestOptions()
+                        .placeholder(R.drawable.ic_action_account_circle_40)
+                        .centerCrop())
                         .into(mImageView);
 
                // mBodyView.setText(post.);
