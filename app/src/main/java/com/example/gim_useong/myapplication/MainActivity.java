@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.example.gim_useong.myapplication.R;
 import com.example.gim_useong.myapplication.models.User;
+import com.example.gim_useong.myapplication.notice.NoticeActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -127,6 +128,9 @@ public class MainActivity extends BaseActivity
             startActivity(new Intent(this, LoginActivity.class));
             finish();
             return true;
+        }else if(id == R.id.menu_notice){
+            Intent intent = new Intent(MainActivity.this, NoticeActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
