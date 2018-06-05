@@ -27,7 +27,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".LoginActivity" />
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -47,7 +47,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".notice.NoticeActivity"></activity>
+        <activity android:name=".notice.NoticeActivity" />
+        <activity android:name=".StarActivity"></activity>
     </application>
 
 </manifest>

@@ -1,7 +1,7 @@
 package com.example.gim_useong.myapplication.notice;
 
+import android.app.AlertDialog;
 import android.content.Context;
-import android.media.audiofx.NoiseSuppressor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,14 +20,14 @@ public class NoticeAdapter extends BaseAdapter{
     public int getCount(){ return noticeList.size(); }
 
     @Override
-    public Notice getItem(int position){ return noticeList.get(position); }
+    public Object getItem(int position){ return noticeList.get(position); }
 
     @Override
-    public long getItemId(int position) { return 0; }
+    public long getItemId(int position) { return position; }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
-        Context context = parent.getContext();
+        final Context context = parent.getContext();
 
         if(convertView == null){
             LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -35,11 +35,12 @@ public class NoticeAdapter extends BaseAdapter{
         }
 
         TextView n_number = (TextView)convertView.findViewById(R.id.notice_number);
-        TextView n_title = (TextView)convertView.findViewById(R.id.notice_title);
+        final TextView n_title = (TextView)convertView.findViewById(R.id.notice_title);
         TextView n_date = (TextView)convertView.findViewById(R.id.notice_date);
 
-        Notice noticeListData = getItem(position);
+        Notice noticeListData = noticeList.get(position);
 
+        final String n_explain = noticeListData.getNotice_contents();
         n_number.setText(noticeListData.getNotice_number());
         n_title.setText(noticeListData.getNotice_title());
         n_date.setText(noticeListData.getNotice_date());
@@ -47,16 +48,20 @@ public class NoticeAdapter extends BaseAdapter{
         n_title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle(n_title.getText());
+                builder.setMessage("\n" + n_explain);
+                builder.show();
             }
         });
 
         return convertView;
     }
 
-    public void addItem(String t, String d, String c) {
+    public void addItem(String n, String t, String d, String c) {
         Notice notice_list_data = new Notice();
 
+        notice_list_data.setNotice_number(n);
         notice_list_data.setNotice_title(t);
         notice_list_data.setNotice_date(d);
         notice_list_data.setNotice_contents(c);
