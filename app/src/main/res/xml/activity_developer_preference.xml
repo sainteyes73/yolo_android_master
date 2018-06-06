@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference
+        android:summary="2018년도 1학기"
+        android:title="명지대학교 컴퓨터공학과" />
+    <ListPreference
+        android:summary="5팀 - 쓰리고"
+        android:title="캡스톤디자인 프로젝트(조세형 교수님)" />
+    <PreferenceCategory android:title="팀 구성원">
+        <ListPreference
+            android:summary="명지대학교 컴퓨터공학과 4학년"
+            android:title="김우성" />
+        <ListPreference
+            android:summary="명지대학교 컴퓨터공학과 4학년"
+            android:title="백종근" />
+        <ListPreference
+            android:summary="명지대학교 컴퓨터공학과 4학년"
+            android:title="신동주" />
+        <ListPreference
+            android:summary="명지대학교 컴퓨터공학과 4학년"
+            android:title="조태구" />
+    </PreferenceCategory>
+</PreferenceScreen>

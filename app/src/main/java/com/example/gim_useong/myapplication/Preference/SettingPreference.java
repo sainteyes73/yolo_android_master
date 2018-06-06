@@ -1,13 +1,15 @@
-package com.example.gim_useong.myapplication;
+package com.example.gim_useong.myapplication.Preference;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 
-public class SettingPreference extends PreferenceActivity {
+import com.example.gim_useong.myapplication.R;
 
+public class SettingPreference extends PreferenceActivity {
+    final Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,17 +47,15 @@ public class SettingPreference extends PreferenceActivity {
                 return true;
             }
         });
-//
-//        ListPreference developer_informatio = (ListPreference)findPreference("developer_information");
-//        Preference developer_information = (Preference)findPreference("developer_information");
-//        developer_information.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-//            @Override
-//            public boolean onPreferenceClick(Preference preference) {
-//
-//
-//                return false;
-//            }
-//        });
 
+        Preference preference = (Preference)findPreference("developer_information");
+        preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                Intent intent = new Intent(SettingPreference.this, developerPreference.class);
+                startActivity(intent);
+                return false;
+            }
+        });
     }
 }

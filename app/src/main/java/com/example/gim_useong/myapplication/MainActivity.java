@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.gim_useong.myapplication.Preference.SettingPreference;
 import com.example.gim_useong.myapplication.models.User;
 import com.example.gim_useong.myapplication.notice.NoticeActivity;
 import com.example.gim_useong.myapplication.notice.TipActivity;
