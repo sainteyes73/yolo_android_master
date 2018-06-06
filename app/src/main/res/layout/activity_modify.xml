@@ -46,9 +46,9 @@
         android:id="@+id/fab_modify"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/mydata_list"
 
-        android:layout_alignEnd="@+id/mydata_list"
+        android:layout_alignStart="@+id/mydata_list"
+        android:layout_alignTop="@+id/mydata_list"
         android:layout_gravity="bottom|end"
         app:srcCompat="@android:drawable/ic_input_add" />
 
