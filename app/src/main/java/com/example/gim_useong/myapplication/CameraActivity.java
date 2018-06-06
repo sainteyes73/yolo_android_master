@@ -105,6 +105,7 @@ public class CameraActivity extends BaseActivity implements View.OnClickListener
         imgMain = (ImageView) findViewById(R.id.img_test);
         btnCamera = (Button) findViewById(R.id.btn_select);
         btnok=(Button)findViewById(R.id.btn_server);
+
         btnok.setOnClickListener(this);
         btnCamera.setOnClickListener(this);
         //btnAlbum.setOnClickListener(this);
@@ -178,18 +179,17 @@ public class CameraActivity extends BaseActivity implements View.OnClickListener
                                         public void onCompleted(Exception e, Response<String> result) {
                                             try {
                                                 JSONObject jobj = new JSONObject(result.getResult());
-                                                Toast.makeText(getApplicationContext(), jobj.getString("response"), Toast.LENGTH_SHORT).show();
 
-                                             //   if((jobj.getString("response").equals("Saved"))){
+
                                                     //액티비티 넘길것
-                                                    String postkey=jobj.getString("postkey");
-                                                    Log.d("a123",postkey);
+                                                    String postkey = jobj.getString("postkey");
+                                                    Log.d("a123", postkey);
                                                     hideProgressDialog();
                                                     Intent intent = new Intent(CameraActivity.this, ModifyActivity.class);
                                                     intent.putExtra(PostDetailActivity.EXTRA_POST_KEY, postkey);
                                                     startActivity(intent);
                                                     finish();
-                                        //        }
+
 
                                             }catch(JSONException e1){
                                                 e1.printStackTrace();

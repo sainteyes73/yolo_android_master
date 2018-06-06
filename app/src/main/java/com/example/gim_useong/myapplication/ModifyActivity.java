@@ -98,20 +98,26 @@ public class ModifyActivity extends BaseActivity {
     private void getAllMyData(DataSnapshot dataSnapshot){
 
         GenericTypeIndicator<ArrayList<String>> t = new GenericTypeIndicator<ArrayList<String>>() {};
-        List<String> arr=null;
+        List<String> arr;
         arr= dataSnapshot.child("body").getValue(t);
         allMyData=arr;
-        if(arr.isEmpty()){
+        if(allMyData==null){
+
             mPostReference.removeValue();
             mUserPostRefernce.removeValue();
             Toast.makeText(ModifyActivity.this,
-                    "인식된 물품이 없습니다",
+                    "인식된 데이터가 없습니다. 다시 시도하여 주십시오",
                     Toast.LENGTH_SHORT).show();
             finish();
+        }else{
+            recyclerViewAdapter = new RecyclerViewAdapter(ModifyActivity.this, arr);
+            recyclerView.setAdapter(recyclerViewAdapter);
         }
+
+
+
         //Log.d("aaaaa",arr.get(0));
-        recyclerViewAdapter = new RecyclerViewAdapter(ModifyActivity.this, arr);
-        recyclerView.setAdapter(recyclerViewAdapter);
+
     }
     private void taskDeletion(DataSnapshot dataSnapshot){
         for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {

@@ -10,5 +10,6 @@
     <color name="colorBlack">#000000</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorDivider">#ebe9e7</color>
+    <color name="toolbarColor">#FFFFFF</color>
 
 </resources>

@@ -194,7 +194,6 @@ public abstract class PostListFragment extends Fragment {
                                    mPostReference.removeValue();
                                    mUserPostRefernce.removeValue();
                                }else{
-                                   Toast.makeText(getActivity().getApplicationContext(), "자신의 글만 삭제 가능", Toast.LENGTH_SHORT).show();
                                }
                             }
 

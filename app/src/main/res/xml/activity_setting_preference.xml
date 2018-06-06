@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="알람 설정">
+        <SwitchPreference
+            android:key="alarm_preference"
+            android:switchTextOff="Off"
+            android:switchTextOn="On"
+            android:title="알람" />
+        <SwitchPreference
+            android:dependency="alarm_preference"
+            android:key="sound_preference"
+            android:switchTextOff="Off"
+            android:switchTextOn="On"
+            android:title="소리알람" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="추가 정보">
+        <ListPreference
+            android:summary="Version 1.00"
+            android:title="앱 버전" />
+        <ListPreference
+            android:key="developer_information"
+            android:summary="개발자 정보를 확인합니다"
+            android:title="개발자 정보" />
+        <ListPreference
+            android:key="send_mail"
+            android:summary="개발자에게 문의메일을 보냅니다"
+            android:title="버그/리포팅" />
+    </PreferenceCategory>
+</PreferenceScreen>

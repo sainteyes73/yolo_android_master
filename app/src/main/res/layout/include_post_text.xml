@@ -17,6 +17,7 @@
 
     <TextView
         android:id="@+id/post_body"
+        style="@style/TextAppearance.AppCompat.Medium"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text=""/>

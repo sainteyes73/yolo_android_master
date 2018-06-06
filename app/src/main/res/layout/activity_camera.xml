@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    tools:context="com.example.gim_useong.myapplication.CameraActivity">
+    android:padding="5dp"
+    tools:context="com.example.gim_useong.myapplication.ranking.StarActivity">
 
     <ImageView
         android:id="@+id/img_test"
@@ -19,13 +19,15 @@
 
     <Button
         android:id="@+id/btn_select"
-        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/mybutton"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/round_button"
         android:padding="10dp"
         android:text="사진 등록"
         android:textColor="#ffffff"
+        android:visibility="visible"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="447dp" />
     <Button
@@ -33,7 +35,9 @@
         android:id="@+id/btn_server"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/mybutton"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/round_button"
         android:padding="10dp"
         android:text="업로드"
         android:textColor="#ffffff"
@@ -42,4 +46,5 @@
 
 
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>
+

@@ -3,8 +3,7 @@ package com.example.gim_useong.myapplication;
 import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 
-import com.amazonaws.auth.CognitoCachingCredentialsProvider;
-import com.amazonaws.regions.Regions;
+
 import com.google.firebase.auth.FirebaseAuth;
 
 public class BaseActivity extends AppCompatActivity {

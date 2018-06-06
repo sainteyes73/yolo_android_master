@@ -2,6 +2,7 @@ package com.example.gim_useong.myapplication;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     }
     @Override
     public int getItemCount() {
+
         return this.mydata.size();
     }
     public void deleteItem(int index) {

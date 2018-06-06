@@ -1,31 +1,23 @@
 package com.example.gim_useong.myapplication;
 
 
-import android.app.ActionBar;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.gim_useong.myapplication.R;
 import com.example.gim_useong.myapplication.models.User;
 import com.example.gim_useong.myapplication.notice.NoticeActivity;
+import com.example.gim_useong.myapplication.notice.TipActivity;
+import com.example.gim_useong.myapplication.ranking.StarActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,7 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener{
     private DatabaseReference mDatabase;
 
     @Override
@@ -42,12 +34,15 @@ public class MainActivity extends BaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setting();
-        setnav();
+
+
     }
     @Override
     public void onStart(){
         super.onStart();
+
         initView();
+        setnav();
     }
     public void setting(){
 
@@ -75,6 +70,18 @@ public class MainActivity extends BaseActivity
     }
     public void initView(){
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        ImageView Import_product=(ImageView) findViewById(R.id.import_product);
+        ImageView My_menu=(ImageView)findViewById(R.id.my_item);
+        ImageView TimeLine=(ImageView)findViewById(R.id.timeline);
+        ImageView Notice=(ImageView)findViewById(R.id.notice);
+        ImageView Tip=(ImageView)findViewById(R.id.tip);
+        ImageView Ranking=(ImageView)findViewById(R.id.ranking);
+        Import_product.setOnClickListener(this);
+        My_menu.setOnClickListener(this);
+        TimeLine.setOnClickListener(this);
+        Notice.setOnClickListener(this);
+        Tip.setOnClickListener(this);
+        Ranking.setOnClickListener(this);
         setSupportActionBar(toolbar);
         //setnav();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -83,6 +90,36 @@ public class MainActivity extends BaseActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+    }
+    @Override
+    public void onClick(View v){
+        switch (v.getId()){
+            case R.id.import_product:
+                Intent intent=new Intent(MainActivity.this,CameraActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.my_item:
+                Intent intent1=new Intent(MainActivity.this, ListViewActivity.class);
+                startActivity(intent1);
+                break;
+            case R.id.timeline:
+                Intent intent2=new Intent(MainActivity.this,ListViewActivity.class);
+                startActivity(intent2);
+                break;
+            case R.id.notice:
+                Intent intent3=new Intent(MainActivity.this,NoticeActivity.class);
+                startActivity(intent3);
+                break;
+            case R.id.tip:
+                Intent intent4=new Intent(MainActivity.this, TipActivity.class);
+                startActivity(intent4);
+                break;
+            case R.id.ranking:
+                Intent intent5=new Intent(MainActivity.this,StarActivity.class);
+                startActivity(intent5);
+                break;
+
+        }
     }
 
     @Override
@@ -122,6 +159,9 @@ public class MainActivity extends BaseActivity
             return true;
         }else if(id == R.id.menu_notice){
             Intent intent = new Intent(MainActivity.this, NoticeActivity.class);
+            startActivity(intent);
+        }else if(id==R.id.setting){
+            Intent intent = new Intent(MainActivity.this,SettingPreference.class);
             startActivity(intent);
         }
 

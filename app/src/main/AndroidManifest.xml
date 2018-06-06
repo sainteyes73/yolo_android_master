@@ -15,7 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CameraActivity" />
+        <activity
+            android:name=".CameraActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -27,28 +29,41 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".LoginActivity" />
+        <activity
+            android:name=".LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ListViewActivity" />
-        <activity android:name=".PostDetailActivity" />
+        <activity
+            android:name=".ListViewActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".PostDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".dialog.DeleteDialog" />
-        <activity android:name=".ModifyActivity" />
-
-        <service
-            android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService"
-            android:enabled="true" />
-
-        <activity android:name=".SplashActivity">
+        <activity
+            android:name=".ModifyActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".notice.NoticeActivity" />
-        <activity android:name=".StarActivity"></activity>
+        <activity
+            android:name=".notice.NoticeActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ranking.StarActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".notice.TipActivity" />
+        <activity android:name=".SettingPreference"
+            android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 
 </manifest>

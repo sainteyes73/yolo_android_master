@@ -17,11 +17,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.amazonaws.auth.CognitoCachingCredentialsProvider;
-import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
-import com.amazonaws.regions.Regions;
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3Client;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.database.ChildEventListener;
@@ -61,20 +56,10 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
     private ImageView mImageView;
     private Button mRecipeBtn;
     private List<String> save;
-    private static TransferUtility transferUtility;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_detail);
-        CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
-                getApplicationContext(),
-                "us-east-1:094487f6-0c89-4565-b7bf-d159671a22b2", // Identity pool ID
-                Regions.US_EAST_1 // Region
-        );
-
-
-        AmazonS3 s3 = new AmazonS3Client(credentialsProvider);
-        transferUtility = new TransferUtility(s3, getApplicationContext());
         // Get post key from intent
         mPostKey = getIntent().getStringExtra(EXTRA_POST_KEY);
         if (mPostKey == null) {
