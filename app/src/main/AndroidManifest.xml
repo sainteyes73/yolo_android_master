@@ -60,7 +60,8 @@
         <activity
             android:name=".ranking.StarActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".notice.TipActivity" />
+        <activity android:name=".notice.TipActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Preference.SettingPreference" />
         <activity android:name=".Preference.developerPreference"></activity>
     </application>
